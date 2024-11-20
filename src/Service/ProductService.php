@@ -70,6 +70,12 @@ class ProductService
             date('Y-m-d_H-i-s')
         );
 
+        if (!is_dir($this->csvDirectory)) {
+            if (!mkdir($this->csvDirectory, 0755, true) && !is_dir($this->csvDirectory)) {
+                throw new \RuntimeException(sprintf('Directory "%s" was not created', $this->csvDirectory));
+            }
+        }
+
         $handle = fopen($filename, 'w');
 
         // Write headers
