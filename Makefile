@@ -1,6 +1,8 @@
 # Development Commands
+generate-secret:
+	docker exec -i product-parser-app-php-1 /bin/sh -c 'php -r "echo \"APP_SECRET=\" . bin2hex(random_bytes(16)) . \"\n\";" >> .env'
 scrape-category:
-	docker exec -i product-parser-app-php-1 /bin/sh -c 'XDEBUG_TRIGGER=VSCODE php bin/console app:scrape-category --type=ebay --category=electronics --pages=3'
+	docker exec -i product-parser-app-php-1 /bin/sh -c 'XDEBUG_TRIGGER=VSCODE php bin/console app:scrape-category --type=$(type) --category=$(category) --pages=$(pages)'
 migrate:
 	docker exec -i product-parser-app-php-1 /bin/sh -c 'php bin/console doctrine:migrations:migrate'
 make-migration:
