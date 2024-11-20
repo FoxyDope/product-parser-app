@@ -12,22 +12,23 @@ Product parser which scrapes products from Ebay store and saves data to database
 
 ### Installing <a name = "installing"></a>
 
-Copy .env.example lines to .env, leave APP_SECRET
-
 ```bash
-docker compose up -d
-cp .env.example .env
-make generate-secret
-make make-migration
-make migrate
+docker compose up -d # Run docker containers 
+
+cp .env.example .env # Copy .env.example to .env
+
+make generate-secret # Generate APP_SECRET
+
+make make-migration # Create migration file
+
+make migrate # Run migrations
 ```
 
 ## Usage <a name = "usage"></a>
 
 ### Run Scraper
 ```bash
-# Run consumer 
-make consume-messages
-# Scrape electronics category (first 3 pages)
-make scrape-category type=ebay category=electronics pages=3
+make consume-messages # Run RabbitMQ message consumer
+
+make scrape-category type=ebay category=electronics pages=3 # Scrape electronics category (first 3 pages)
 ```
