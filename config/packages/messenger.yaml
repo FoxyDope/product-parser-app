@@ -1,0 +1,20 @@
+framework:
+    messenger:
+        failure_transport: failed
+        transports:
+            failed: 'doctrine://default?queue_name=failed'
+            product_parsing:
+                dsn: '%env(MESSENGER_TRANSPORT_DSN)%'
+                options:
+                    exchange:
+                        name: product_parsing
+                        type: direct
+                    queues:
+                        product_parsing: ~
+                retry_strategy:
+                    max_retries: 3
+                    delay: 1000
+                    multiplier: 2
+
+        routing:
+            'App\Message\ProductWriteMessage': product_parsing 
