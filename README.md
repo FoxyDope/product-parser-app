@@ -23,14 +23,11 @@ cp .env.example .env
 make generate-secret 
 # Install dependencies
 make ci
-# Create migration file
-make make-migration 
 # Run migrations
 make migrate 
 ```
 
 ## Usage <a name = "usage"></a>
-
 ### Run Scraper
 ```bash
 # Run RabbitMQ message consumer
