@@ -10,22 +10,30 @@ RUN apt-get update && apt-get install -y \
     pkg-config \
     libssl-dev \
     librabbitmq-dev \
-    && docker-php-ext-install zip pdo pdo_mysql \
+    libxml2-dev \
+    && docker-php-ext-install \
+        zip \
+        pdo \
+        pdo_mysql \
+        curl \
+        mbstring \
+        dom \
+        xml \
     && pecl install amqp \
     && docker-php-ext-enable amqp
 
 # Clean up to reduce image size
 RUN apt-get clean && rm -rf /var/lib/apt/lists/*
 
-
+# Copy Composer binary from composer image
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+
 # Install xdebug
 RUN pecl install xdebug \
-&& docker-php-ext-enable xdebug
+    && docker-php-ext-enable xdebug
 
 # Add xdebug configuration
 COPY docker/php/conf.d/xdebug.ini /usr/local/etc/php/conf.d/xdebug.ini
 
-WORKDIR /var/www/html 
-
-
+# Set working directory
+WORKDIR /var/www/html

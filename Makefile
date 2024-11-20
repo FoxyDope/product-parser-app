@@ -17,4 +17,9 @@ ci:
 	docker exec -i $(CONTAINER_NAME) /bin/sh -c 'composer install'
 composer:
 	docker exec -i $(CONTAINER_NAME) /bin/sh -c 'composer $(CMD)'
-
+test-all:
+	docker exec -i $(CONTAINER_NAME) /bin/sh -c './vendor/bin/phpunit'
+test-unit:
+	docker exec -i $(CONTAINER_NAME) /bin/sh -c './vendor/bin/phpunit --testsuite Unit'
+test-functional:
+	docker exec -i $(CONTAINER_NAME) /bin/sh -c './vendor/bin/phpunit --testsuite Functional'

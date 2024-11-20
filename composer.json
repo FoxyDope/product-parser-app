@@ -32,7 +32,9 @@
         "symfony/yaml": "7.1.*"
     },
     "require-dev": {
-        "symfony/maker-bundle": "^1.61"
+        "symfony/maker-bundle": "^1.61",
+        "phpunit/phpunit": "^10",
+        "mockery/mockery": "^1.6"
     },
     "config": {
         "allow-plugins": {
